@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import {
-  ArrowLeft,
   Bot,
   Play,
   CheckCircle2,
@@ -12,7 +10,6 @@ import {
   ImageIcon,
   AlertTriangle,
 } from "lucide-react";
-import { Section } from "@/components/ui/section";
 import { prisma } from "@/lib/prisma";
 import { TriggerButton } from "./trigger-button";
 
@@ -153,35 +150,24 @@ export default async function AutomationPage() {
   ]);
 
   return (
-    <Section>
-      <div className="space-y-8 max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="space-y-4">
-          <Link
-            href="/admin"
-            className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <ArrowLeft className="h-3.5 w-3.5" />
-            Back to Admin
-          </Link>
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-primary/10">
-                <Bot className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-                  Content Automation
-                </h1>
-                <p className="text-sm text-muted-foreground">
-                  AI-powered content generation pipeline
-                </p>
-              </div>
-            </div>
-            <TriggerButton />
+    <div className="p-6 lg:p-8 space-y-8 max-w-7xl mx-auto">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-primary/10">
+            <Bot className="h-5 w-5 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              Content Automation
+            </h1>
+            <p className="text-sm text-muted-foreground">
+              AI-powered content generation pipeline
+            </p>
           </div>
         </div>
+        <TriggerButton />
+      </div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -347,11 +333,10 @@ export default async function AutomationPage() {
           </div>
         )}
 
-        <p className="text-center text-xs text-muted-foreground">
-          The content engine runs daily at 6:00 AM UTC when the worker is
-          active. You can also trigger runs manually.
-        </p>
-      </div>
-    </Section>
+      <p className="text-center text-xs text-muted-foreground">
+        The content engine runs daily at 6:00 AM UTC when the worker is
+        active. You can also trigger runs manually.
+      </p>
+    </div>
   );
 }
