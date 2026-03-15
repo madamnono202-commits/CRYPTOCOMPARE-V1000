@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowLeft, BarChart3, MousePointerClick, Globe, Clock } from "lucide-react";
-import { Section } from "@/components/ui/section";
+import { BarChart3, MousePointerClick, Globe, Clock } from "lucide-react";
 import {
   getAffiliateAnalytics,
   type ClicksByExchange,
@@ -133,147 +131,135 @@ export default async function AffiliateAnalyticsPage() {
       : "—";
 
   return (
-    <Section>
-      <div className="space-y-8 max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="space-y-4">
-          <Link
-            href="/admin"
-            className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <ArrowLeft className="h-3.5 w-3.5" />
-            Back to Admin
-          </Link>
-
-          <div className="flex items-center gap-3">
-            <div className="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-primary/10">
-              <BarChart3 className="h-5 w-5 text-primary" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-                Affiliate Analytics
-              </h1>
-              <p className="text-sm text-muted-foreground">
-                Track affiliate click performance across the platform
-              </p>
-            </div>
-          </div>
+    <div className="p-6 lg:p-8 space-y-8 max-w-7xl mx-auto">
+      {/* Header */}
+      <div className="flex items-center gap-3">
+        <div className="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-primary/10">
+          <BarChart3 className="h-5 w-5 text-primary" />
         </div>
-
-        {/* Stat Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatCard
-            icon={MousePointerClick}
-            label="Total Clicks"
-            value={analytics.totalClicks.toLocaleString()}
-          />
-          <StatCard
-            icon={BarChart3}
-            label="Exchanges Clicked"
-            value={analytics.clicksByExchange.length}
-          />
-          <StatCard
-            icon={Globe}
-            label="Top Source"
-            value={topSource}
-          />
-          <StatCard
-            icon={MousePointerClick}
-            label="Top Exchange"
-            value={topExchange}
-          />
-        </div>
-
-        {/* Charts Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Clicks by Exchange */}
-          <div className="rounded-xl border border-border/60 bg-card p-5 space-y-4">
-            <h2 className="text-sm font-semibold flex items-center gap-2">
-              <BarChart3 className="h-4 w-4 text-muted-foreground" />
-              Clicks by Exchange
-            </h2>
-            <HorizontalBarChart
-              data={exchangeChartData}
-              labelKey="Exchange"
-              valueKey="Clicks"
-              color="bg-primary"
-            />
-          </div>
-
-          {/* Clicks by Source Page */}
-          <div className="rounded-xl border border-border/60 bg-card p-5 space-y-4">
-            <h2 className="text-sm font-semibold flex items-center gap-2">
-              <Globe className="h-4 w-4 text-muted-foreground" />
-              Clicks by Source Page
-            </h2>
-            <HorizontalBarChart
-              data={sourceChartData}
-              labelKey="Source"
-              valueKey="Clicks"
-              color="bg-blue-500"
-            />
-          </div>
-        </div>
-
-        {/* Recent Click Activity */}
-        <div className="rounded-xl border border-border/60 bg-card p-5 space-y-4">
-          <h2 className="text-sm font-semibold flex items-center gap-2">
-            <Clock className="h-4 w-4 text-muted-foreground" />
-            Recent Click Activity
-          </h2>
-
-          {analytics.recentClicks.length === 0 ? (
-            <p className="text-sm text-muted-foreground py-6 text-center">
-              No clicks recorded yet. Affiliate click activity will appear here in real-time.
-            </p>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm">
-                <thead>
-                  <tr className="border-b border-border/40">
-                    <th className="pb-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                      Exchange
-                    </th>
-                    <th className="pb-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                      Source Page
-                    </th>
-                    <th className="pb-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                      Time
-                    </th>
-                    <th className="pb-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                      IP Hash
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border/40">
-                  {analytics.recentClicks.map((click) => (
-                    <tr
-                      key={click.id}
-                      className="transition-colors hover:bg-muted/30"
-                    >
-                      <td className="py-3 font-medium">{click.exchangeName}</td>
-                      <td className="py-3 text-muted-foreground">
-                        {formatSourcePage(click.sourcePage)}
-                      </td>
-                      <td className="py-3 text-muted-foreground">
-                        {new Date(click.clickedAt).toLocaleString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}
-                      </td>
-                      <td className="py-3 font-mono text-xs text-muted-foreground">
-                        {click.ipHash}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+            Affiliate Analytics
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            Track affiliate click performance across the platform
+          </p>
         </div>
       </div>
-    </Section>
+
+      {/* Stat Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatCard
+          icon={MousePointerClick}
+          label="Total Clicks"
+          value={analytics.totalClicks.toLocaleString()}
+        />
+        <StatCard
+          icon={BarChart3}
+          label="Exchanges Clicked"
+          value={analytics.clicksByExchange.length}
+        />
+        <StatCard
+          icon={Globe}
+          label="Top Source"
+          value={topSource}
+        />
+        <StatCard
+          icon={MousePointerClick}
+          label="Top Exchange"
+          value={topExchange}
+        />
+      </div>
+
+      {/* Charts Row */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Clicks by Exchange */}
+        <div className="rounded-xl border border-border/60 bg-card p-5 space-y-4">
+          <h2 className="text-sm font-semibold flex items-center gap-2">
+            <BarChart3 className="h-4 w-4 text-muted-foreground" />
+            Clicks by Exchange
+          </h2>
+          <HorizontalBarChart
+            data={exchangeChartData}
+            labelKey="Exchange"
+            valueKey="Clicks"
+            color="bg-primary"
+          />
+        </div>
+
+        {/* Clicks by Source Page */}
+        <div className="rounded-xl border border-border/60 bg-card p-5 space-y-4">
+          <h2 className="text-sm font-semibold flex items-center gap-2">
+            <Globe className="h-4 w-4 text-muted-foreground" />
+            Clicks by Source Page
+          </h2>
+          <HorizontalBarChart
+            data={sourceChartData}
+            labelKey="Source"
+            valueKey="Clicks"
+            color="bg-blue-500"
+          />
+        </div>
+      </div>
+
+      {/* Recent Click Activity */}
+      <div className="rounded-xl border border-border/60 bg-card p-5 space-y-4">
+        <h2 className="text-sm font-semibold flex items-center gap-2">
+          <Clock className="h-4 w-4 text-muted-foreground" />
+          Recent Click Activity
+        </h2>
+
+        {analytics.recentClicks.length === 0 ? (
+          <p className="text-sm text-muted-foreground py-6 text-center">
+            No clicks recorded yet. Affiliate click activity will appear here in real-time.
+          </p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="border-b border-border/40">
+                  <th className="pb-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    Exchange
+                  </th>
+                  <th className="pb-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    Source Page
+                  </th>
+                  <th className="pb-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    Time
+                  </th>
+                  <th className="pb-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    IP Hash
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border/40">
+                {analytics.recentClicks.map((click) => (
+                  <tr
+                    key={click.id}
+                    className="transition-colors hover:bg-muted/30"
+                  >
+                    <td className="py-3 font-medium">{click.exchangeName}</td>
+                    <td className="py-3 text-muted-foreground">
+                      {formatSourcePage(click.sourcePage)}
+                    </td>
+                    <td className="py-3 text-muted-foreground">
+                      {new Date(click.clickedAt).toLocaleString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </td>
+                    <td className="py-3 font-mono text-xs text-muted-foreground">
+                      {click.ipHash}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
