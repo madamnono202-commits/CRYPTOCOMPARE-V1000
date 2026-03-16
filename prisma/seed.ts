@@ -597,9 +597,9 @@ Neither CeFi nor DeFi is inherently better. The best choice depends on your expe
     `Created ${blogPosts.length} blog posts: ${blogPosts.map((p) => p.slug).join(", ")}`
   );
 
-  // ─── Automation Job (sample) ────────────────────────────────────────────────
+  // ─── Automation Run (sample) ────────────────────────────────────────────────
 
-  await prisma.automationJob.create({
+  await prisma.automationRun.create({
     data: {
       jobType: "exchange_data_sync",
       status: "completed",
@@ -609,7 +609,7 @@ Neither CeFi nor DeFi is inherently better. The best choice depends on your expe
     },
   });
 
-  console.log("Created 1 sample automation job");
+  console.log("Created 1 sample automation run");
   console.log("Seeding complete!");
 }
 
